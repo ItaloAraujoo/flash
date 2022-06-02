@@ -1,30 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import Torch from 'react-native-torch';
-import RNShake from 'react-native-shake';
 
 export default function App() {
 
   const [toggle, setToggle] = useState(false);
   const handleChangeToggle = () => setToggle(oldToggle => !oldToggle);
-  
-  useEffect(() => {
-    // Liga flash do celular
-    Torch.switchState(toggle);
-  }, [toggle]);
-
-  useEffect(() => {
-    /**
-     * Quando o celular for chacoalhado, mudaremos o toggle
-     */
-    const subscription = RNShake.addListener(() => {
-      setToggle(oldToggle => !oldToggle);
-    });
-
-    // Essa func vai ser chamada quando o componets
-    // For ser desmontado
-    return () => subscription.remove();
-  }, []);
 
   return (
     <View style={toggle ? style.containerLight : style.container}>
@@ -68,4 +48,5 @@ const style = StyleSheet.create({
     width: 250,
     height: 250,
   },
-});
+}); 
+
